@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: fct_race_results
+    description: >
+      Core fact table at result grain (one row per driver per race).
+      Materialized incrementally on result_id using race_date as the
+      watermark for new data. Includes a dbt_utils surrogate key and
+      a dbt_loaded_at audit column.
+    columns:
+      - name: fct_result_sk
+        description: Surrogate key generated via dbt_utils.generate_surrogate_key.
+        tests: [unique, not_null]
+      - name: result_id
+        tests: [unique, not_null]
+      - name: points
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 26
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['Finished', 'DNF', 'DNS', 'Collision', 'Mechanical']

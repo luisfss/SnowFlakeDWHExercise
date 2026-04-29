@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: stg_drivers
+    description: Staged driver master with a computed full_name field.
+    columns:
+      - name: driver_id
+        tests: [unique, not_null]
+      - name: driver_code
+        tests: [unique, not_null]
+      - name: full_name
+        tests: [not_null]

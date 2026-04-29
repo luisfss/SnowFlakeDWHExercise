@@ -1,0 +1,30 @@
+name: 'dwf1'
+version: '1.0.0'
+config-version: 2
+
+profile: 'dwf1'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+analysis-paths: ["analyses"]
+
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  dwf1:
+    staging:
+      +materialized: view
+      +schema: staging
+    intermediate:
+      +materialized: table
+      +schema: intermediate
+    marts:
+      +materialized: table
+      +schema: marts
+
+seeds:
+  dwf1:
+    +schema: raw

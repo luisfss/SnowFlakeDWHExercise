@@ -1,0 +1,46 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: "{{ target.schema }}_raw"
+    description: >
+      Seed data loaded directly from CSV files. Represents the raw ingestion
+      layer before any transformation or renaming.
+    tables:
+      - name: races
+        description: One row per race weekend in the season.
+        columns:
+          - name: race_id
+            description: Surrogate primary key for the race.
+            tests: [unique, not_null]
+          - name: season
+            tests: [not_null]
+          - name: race_date
+            tests: [not_null]
+
+      - name: drivers
+        description: Master list of drivers competing in the season.
+        columns:
+          - name: driver_id
+            tests: [unique, not_null]
+          - name: driver_code
+            description: Three-letter abbreviation used in broadcast graphics.
+            tests: [unique, not_null]
+
+      - name: constructors
+        description: Master list of F1 constructors (teams).
+        columns:
+          - name: constructor_id
+            tests: [unique, not_null]
+
+      - name: results
+        description: One row per driver per race, capturing finish position and points.
+        columns:
+          - name: result_id
+            tests: [unique, not_null]
+          - name: race_id
+            tests: [not_null]
+          - name: driver_id
+            tests: [not_null]
+          - name: points
+            tests: [not_null]

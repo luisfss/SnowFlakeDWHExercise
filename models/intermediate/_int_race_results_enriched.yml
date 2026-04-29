@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: int_race_results_enriched
+    description: >
+      Result grain enriched with driver, constructor, and race context.
+      Intended as a reusable wide table for downstream marts so they avoid
+      redundant joins. Adds positions_gained (grid minus finish position).
+    columns:
+      - name: result_id
+        tests: [unique, not_null]
+      - name: positions_gained
+        description: Positive means the driver gained places relative to their grid slot.

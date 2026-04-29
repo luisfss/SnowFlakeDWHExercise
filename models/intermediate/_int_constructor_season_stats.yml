@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: int_constructor_season_stats
+    description: >
+      Season-level aggregation per constructor, summing across both drivers.
+      Includes championship position via window function.
+    columns:
+      - name: constructor_id
+        tests: [not_null]
+      - name: season
+        tests: [not_null]
+      - name: total_points
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0

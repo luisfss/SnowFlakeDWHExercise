@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: stg_constructors
+    description: Staged constructor (team) master.
+    columns:
+      - name: constructor_id
+        tests: [unique, not_null]

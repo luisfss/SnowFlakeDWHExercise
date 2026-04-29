@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: stg_races
+    description: Staged race calendar with typed columns.
+    columns:
+      - name: race_id
+        tests: [unique, not_null]

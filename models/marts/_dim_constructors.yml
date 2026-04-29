@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_constructors
+    description: >
+      Constructor dimension denormalized with season standings.
+      One row per constructor per season.
+    columns:
+      - name: dim_constructor_sk
+        tests: [unique, not_null]
+      - name: constructor_id
+        tests: [not_null]
+      - name: championship_position
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 1
+              max_value: 10

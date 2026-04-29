@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: int_driver_season_stats
+    description: >
+      Season-level aggregation per driver. Computes points, wins, podiums,
+      fastest laps, finish rate, and championship position via window function.
+      This is the primary source for the driver standings mart.
+    columns:
+      - name: driver_id
+        tests: [not_null]
+      - name: season
+        tests: [not_null]
+      - name: total_points
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+      - name: championship_position
+        tests: [not_null]
+      - name: finish_rate_pct
+        description: Percentage of races where the driver was classified as Finished.
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 100

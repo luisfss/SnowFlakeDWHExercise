@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: dim_drivers
+    description: >
+      Driver dimension denormalized with season performance stats.
+      One row per driver per season. Intended as a flat BI-ready table
+      so dashboards require no additional joins.
+    columns:
+      - name: dim_driver_sk
+        description: Surrogate key scoped to driver + season.
+        tests: [unique, not_null]
+      - name: driver_id
+        tests: [not_null]
+      - name: championship_position
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 1
+              max_value: 20

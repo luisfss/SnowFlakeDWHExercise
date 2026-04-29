@@ -1,0 +1,27 @@
+# profiles.yml
+# Place this file at ~/.dbt/profiles.yml (NOT inside the project repo)
+
+dwf1:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "<your_account_identifier>"   # e.g. xy12345.us-east-1
+      user: "<your_username>"
+      password: "<your_password>"            # or use authenticator: externalbrowser
+      role: "<your_role>"                    # e.g. SYSADMIN or TRANSFORMER
+      warehouse: "<your_warehouse>"          # e.g. COMPUTE_WH
+      database: DWF1
+      schema: dev                            # personal dev schema; models land in dev_staging / dev_intermediate / dev_marts
+      threads: 4
+
+    prod:
+      type: snowflake
+      account: "<your_account_identifier>"
+      user: "<your_username>"
+      password: "<your_password>"
+      role: "<your_role>"
+      warehouse: "<your_warehouse>"
+      database: DWF1
+      schema: prod
+      threads: 4

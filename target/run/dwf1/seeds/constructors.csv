@@ -1,0 +1,14 @@
+
+    
+    
+    
+    create table DWF1.dev_raw.constructors (constructor_id text,constructor_name text,nationality text,base_country text)
+  ;
+    -- dbt seed --
+    
+            insert into DWF1.dev_raw.constructors (constructor_id, constructor_name, nationality, base_country) values
+            (%s,%s,%s,%s),(%s,%s,%s,%s),(%s,%s,%s,%s),(%s,%s,%s,%s),(%s,%s,%s,%s),(%s,%s,%s,%s),(%s,%s,%s,%s),(%s,%s,%s,%s),(%s,%s,%s,%s),(%s,%s,%s,%s)
+        
+
+;
+  
